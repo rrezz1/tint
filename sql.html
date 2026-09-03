@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SQL — TINT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">TINT <span>Borek</span></a>
+    <nav>
+      <a href="index.html">Plan</a>
+      <a href="python.html">Python</a>
+      <a href="frameworks.html">Django / FastAPI</a>
+      <a href="api.html">REST</a>
+      <a class="active" href="sql.html">SQL</a>
+      <a href="frontend.html">Frontend</a>
+      <a href="git.html">Git</a>
+      <a href="sjellja.html">Sjellja</a>
+      <a href="kuiz.html">Kuiz</a>
+    </nav>
+  </header>
+  <main class="wrap">
+    <article class="page">
+      <p class="kicker">PostgreSQL / MySQL</p>
+      <h1>Query qe duhet t’i shkruash pa Google</h1>
+      <h2>JOIN</h2>
+<pre>SELECT u.name, o.total
+FROM users u
+INNER JOIN orders o ON o.user_id = u.id;</pre>
+      <p>INNER: vetem perputhjet. LEFT: te gjithe users, edhe pa porosi.</p>
+<pre>SELECT u.id, u.name
+FROM users u
+LEFT JOIN orders o ON o.user_id = u.id
+WHERE o.id IS NULL;</pre>
+      <p>Kjo gjen userat pa porosi. Mesoje — vjen shpesh.</p>
+      <h2>Index, PK, FK, N+1</h2>
+      <ul>
+        <li><strong>PK</strong> identifikon rreshtin. <strong>FK</strong> lidh tabela.</li>
+        <li><strong>Index</strong> e shpejton WHERE/JOIN, e ngadaleson pak INSERT.</li>
+        <li><strong>N+1</strong>: 1 query per listen + 1 per cdo rresht. Zgjidhje: JOIN ose <code>select_related</code>.</li>
+        <li><strong>Transaksion</strong>: te gjitha ndryshimet ose asnje.</li>
+      </ul>
+<pre>SELECT DATE_TRUNC('month', created_at) AS muaj, COUNT(*)
+FROM orders
+GROUP BY 1
+ORDER BY 1;</pre>
+    </article>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+</html>

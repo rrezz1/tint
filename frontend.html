@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frontend — TINT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">TINT <span>Borek</span></a>
+    <nav>
+      <a href="index.html">Plan</a>
+      <a href="python.html">Python</a>
+      <a href="frameworks.html">Django / FastAPI</a>
+      <a href="api.html">REST</a>
+      <a href="sql.html">SQL</a>
+      <a class="active" href="frontend.html">Frontend</a>
+      <a href="git.html">Git</a>
+      <a href="sjellja.html">Sjellja</a>
+      <a href="kuiz.html">Kuiz</a>
+    </nav>
+  </header>
+  <main class="wrap">
+    <article class="page">
+      <p class="kicker">HTML, CSS, JavaScript</p>
+      <h1>Baze e paster, mjafton per junior</h1>
+      <ul>
+        <li>HTML = strukture. Perdor <code>header</code>, <code>nav</code>, <code>main</code>.</li>
+        <li>CSS box model: content + padding + border + margin.</li>
+        <li>Flex: rresht. Grid: tabele e lire. Responsive: <code>@media</code>.</li>
+        <li>JS: <code>const</code>/<code>let</code>, <code>map</code>/<code>filter</code>, <code>async/await</code>.</li>
+      </ul>
+<pre>const res = await fetch("/api/users");
+const data = await res.json();</pre>
+      <p><strong>React (avantazh):</strong> komponent, props hyjne, state eshte e dhena lokale, <code>useEffect</code> per fetch. Nese nuk e di thelle, thuaj te verteten dhe nje shembull te vogel.</p>
+      <p class="note">Kjo faqe vet eshte shembull: HTML + CSS, pak JS per kuiz dhe countdown.</p>
+    </article>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+</html>

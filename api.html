@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>REST — TINT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">TINT <span>Borek</span></a>
+    <nav>
+      <a href="index.html">Plan</a>
+      <a href="python.html">Python</a>
+      <a href="frameworks.html">Django / FastAPI</a>
+      <a class="active" href="api.html">REST</a>
+      <a href="sql.html">SQL</a>
+      <a href="frontend.html">Frontend</a>
+      <a href="git.html">Git</a>
+      <a href="sjellja.html">Sjellja</a>
+      <a href="kuiz.html">Kuiz</a>
+    </nav>
+  </header>
+  <main class="wrap">
+    <article class="page">
+      <p class="kicker">Kerkese kryesore e JD</p>
+      <h1>REST: metoda, status, dizajn</h1>
+      <p><strong>Stateless:</strong> cdo request mban auth dhe te dhenat. Serveri nuk mban “ku mbeta” ne kujtese.</p>
+      <table>
+        <tr><th>Metoda</th><th>Kuptimi</th></tr>
+        <tr><td>GET</td><td>Lexo, mos ndrysho</td></tr>
+        <tr><td>POST</td><td>Krijo</td></tr>
+        <tr><td>PUT / PATCH</td><td>Ndrysho (i plote / pjesor)</td></tr>
+        <tr><td>DELETE</td><td>Fshi</td></tr>
+      </table>
+      <table>
+        <tr><th>Kod</th><th>Kur</th></tr>
+        <tr><td>200</td><td>OK</td></tr>
+        <tr><td>201</td><td>U krijua</td></tr>
+        <tr><td>400</td><td>Input i keq</td></tr>
+        <tr><td>401</td><td>Pa login</td></tr>
+        <tr><td>403</td><td>Nuk ke te drejte</td></tr>
+        <tr><td>404</td><td>Nuk u gjet</td></tr>
+        <tr><td>500</td><td>Gabim serveri</td></tr>
+      </table>
+      <h2>Si ta thuash per users</h2>
+      <pre>GET    /users
+GET    /users/12
+POST   /users
+PATCH  /users/12
+DELETE /users/12</pre>
+      <p>Validim, pagination, mos kthe password. Email unik → 400 ose 409. Idempotent: GET/PUT/DELETE te perseritura; POST zakonisht jo.</p>
+    </article>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+</html>

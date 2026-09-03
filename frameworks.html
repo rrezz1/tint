@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Frameworks — TINT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">TINT <span>Borek</span></a>
+    <nav>
+      <a href="index.html">Plan</a>
+      <a href="python.html">Python</a>
+      <a class="active" href="frameworks.html">Django / FastAPI</a>
+      <a href="api.html">REST</a>
+      <a href="sql.html">SQL</a>
+      <a href="frontend.html">Frontend</a>
+      <a href="git.html">Git</a>
+      <a href="sjellja.html">Sjellja</a>
+      <a href="kuiz.html">Kuiz</a>
+    </nav>
+  </header>
+  <main class="wrap">
+    <article class="page">
+      <p class="kicker">Django, Flask ose FastAPI</p>
+      <h1>Fol nje framework mire, jo tre keq</h1>
+      <table>
+        <tr><th></th><th>Django</th><th>Flask</th><th>FastAPI</th></tr>
+        <tr><td>Stil</td><td>Gati me admin, ORM, auth</td><td>I vogel</td><td>Modern, Pydantic, OpenAPI</td></tr>
+        <tr><td>Kur</td><td>App e plote</td><td>Micro / e thjeshte</td><td>API e shpejte</td></tr>
+      </table>
+
+      <h2>FastAPI — mbaje ne kok</h2>
+<pre>from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class UserIn(BaseModel):
+    email: str
+    name: str
+
+@app.get("/users/{user_id}")
+def get_user(user_id: int):
+    return {"id": user_id}
+
+@app.post("/users")
+def create_user(user: UserIn):
+    return user</pre>
+
+      <h2>Fjalori i shkurter</h2>
+      <ul>
+        <li><strong>ORM</strong> — objekte Python ↔ tabela SQL.</li>
+        <li><strong>Migration</strong> — ndryshon schema pa humbur te dhena.</li>
+        <li><strong>Middleware</strong> — kod para/pas cdo request (auth, log).</li>
+        <li><strong>Session vs JWT</strong> — session rri ne server; JWT eshte token i nenshkruar te klienti.</li>
+      </ul>
+      <p class="note">Django: Model → migrate → view/serializer → urls. Kjo fjali mjafton nese ke bere nje tutorial.</p>
+    </article>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+</html>
