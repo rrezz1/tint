@@ -85,7 +85,7 @@ document.querySelectorAll("[data-quiz]").forEach((form) => {
       return;
     }
     if (picked === correct) {
-      out.textContent = "Sakt. Kjo eshte pergjigja qe do te doje Laiden.";
+      out.textContent = "Sakt. Kjo eshte pergjigja qe pret nje tech lead.";
       out.className = "result good";
     } else {
       out.textContent = "Jo sakte. Hap shpjegimin poshte dhe provo perseri.";

@@ -1,4 +1,4 @@
-# TINT — pergatitje intervistë Borek
+# TINT — pergatitje intervistë teknike
 
 Site statik. Live: https://rrezz1.github.io/tint/
 
