@@ -126,11 +126,9 @@ a.page-btn span {
   font-size: 0.82rem;
   opacity: 0.8;
 }
-a.page-btn.ghost {
-  background: var(--paper);
-  color: var(--ink);
-  box-shadow: 0 8px 0 #2a241c;
-  border: 1px solid var(--line);
+a.page-btn.wide {
+  grid-column: 1 / -1;
+  min-height: 72px;
 }
 .pages-title { margin: 32px 0 0; }
 .card {
