@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TINT — Intervista teknike</title>
+  <title>Kryesore — TINT</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -16,45 +16,48 @@
 
   <main class="wrap">
     <section class="hero">
-      <p class="kicker">Junior Python Full-Stack · Borek · Prishtine</p>
-      <h1>Material i plote per Laiden, deri neser ora 14:00</h1>
-      <p class="lead">Python OOP, live kod, Django/FastAPI, REST, SQL, frontend, Git/Docker, debug, anglisht, kuiz. Fol me ze. Mos memorizo rresht per rresht.</p>
+      <p class="kicker">Faqja kryesore</p>
+      <h1>Zgjidh nje faqe me buton</h1>
+      <p class="lead">Te gjitha faqet e pergatitjes per intervisten teknike. Kliko butonin.</p>
       <div class="clock">
         <div class="chip" data-countdown>Duke llogaritur...</div>
-        <div class="chip">Live: <b>rrezz1.github.io/tint</b></div>
-        <div class="chip">Paga: <b>950 €</b></div>
+        <div class="chip">https://rrezz1.github.io/tint/</div>
       </div>
     </section>
 
-    <section class="grid">
-      <a class="card" href="python.html"><div class="meta">1 · 70 min</div><h2>Python</h2><p>Struktura, copy, OOP, file, venv, GIL, typing.</p></a>
-      <a class="card" href="detyra.html"><div class="meta">0 · kryesorja</div><h2>Detyra + zgjidhje</h2><p>40+ ushtrime Python, SQL, API, JS. Hap zgjidhjen vetem pasi te shkruash.</p></a>
-      <a class="card" href="live.html"><div class="meta">2 · 80 min</div><h2>Live kod</h2><p>10 probleme: palindrome, two sum, FizzBuzz, mini API.</p></a>
-      <a class="card" href="frameworks.html"><div class="meta">3 · 50 min</div><h2>Django / FastAPI</h2><p>MVT, ORM, migration, Pydantic, Flask nje file.</p></a>
-      <a class="card" href="api.html"><div class="meta">4 · 40 min</div><h2>REST</h2><p>Status, pagination, 401/403, dizajn /users.</p></a>
-      <a class="card" href="sql.html"><div class="meta">5 · 50 min</div><h2>SQL</h2><p>JOIN, GROUP BY, index, 4 ushtrime me zgjidhje.</p></a>
-      <a class="card" href="frontend.html"><div class="meta">6 · 35 min</div><h2>Frontend</h2><p>HTML/CSS/JS, fetch, React ne nje paragraf.</p></a>
-      <a class="card" href="git.html"><div class="meta">7 · 25 min</div><h2>Git + Docker</h2><p>PR, conflict, pytest, Dockerfile.</p></a>
-      <a class="card" href="debug.html"><div class="meta">8 · 20 min</div><h2>Debug</h2><p>Stack trace, CORS, N+1, NoneType.</p></a>
-      <a class="card" href="sjellja.html"><div class="meta">9 · 20 min</div><h2>Sjellja</h2><p>STAR, projekt, paga, pyetje per ta.</p></a>
-      <a class="card" href="anglisht.html"><div class="meta">10 · 20 min</div><h2>English</h2><p>Fjali te gatshme per t’i thene neser.</p></a>
-      <a class="card" href="kuiz.html"><div class="meta">11 · 25 min</div><h2>Kuiz</h2><p>12 pyetje me shpjegim.</p></a>
-    </section>
+    <h2 class="pages-title">Te gjitha faqet</h2>
+    <div class="page-btns">
+      <a class="page-btn" href="detyra.html">Detyra<span>52 ushtrime + zgjidhje</span></a>
+      <a class="page-btn" href="detyra-python.html">Detyra Python<span>20 probleme</span></a>
+      <a class="page-btn" href="detyra-sql.html">Detyra SQL<span>16 query</span></a>
+      <a class="page-btn" href="detyra-web.html">Detyra Web<span>API, JS, Git</span></a>
+      <a class="page-btn" href="live.html">Live kod<span>10 probleme whiteboard</span></a>
+      <a class="page-btn" href="python.html">Python<span>teoria</span></a>
+      <a class="page-btn" href="frameworks.html">Django / FastAPI<span>teoria</span></a>
+      <a class="page-btn" href="api.html">REST API<span>teoria</span></a>
+      <a class="page-btn" href="sql.html">SQL<span>teoria</span></a>
+      <a class="page-btn" href="frontend.html">Frontend<span>HTML CSS JS</span></a>
+      <a class="page-btn" href="git.html">Git + Docker<span>teoria</span></a>
+      <a class="page-btn" href="debug.html">Debug<span>gabime klasike</span></a>
+      <a class="page-btn" href="sjellja.html">Sjellja<span>STAR, paga</span></a>
+      <a class="page-btn" href="anglisht.html">English<span>fjali gati</span></a>
+      <a class="page-btn" href="kuiz.html">Kuiz<span>12 pyetje</span></a>
+    </div>
 
     <section class="plan">
       <h2>Lista — sheno cfare ke mbaruar</h2>
       <ul>
-        <li><label><input type="checkbox" data-plan="p1"><span>Python deri te OOP dhe venv. <small>python.html</small></span></label></li>
-        <li><label><input type="checkbox" data-plan="p2"><span>10 detyra Python pa hapur zgjidhjen. <small>detyra-python.html</small></span></label></li>
-        <li><label><input type="checkbox" data-plan="p2b"><span>8 detyra SQL + 6 API. <small>detyra-sql.html, detyra-web.html</small></span></label></li>
-        <li><label><input type="checkbox" data-plan="p3"><span>CRUD FastAPI + Django model ne kok. <small>frameworks.html</small></span></label></li>
-        <li><label><input type="checkbox" data-plan="p4"><span>REST status + SQL 4 ushtrimet. <small>api.html, sql.html</small></span></label></li>
-        <li><label><input type="checkbox" data-plan="p5"><span>Frontend fetch + Git PR. <small>frontend.html, git.html</small></span></label></li>
-        <li><label><input type="checkbox" data-plan="p6"><span>English me ze + kuizi 12. <small>anglisht.html, kuiz.html</small></span></label></li>
+        <li><label><input type="checkbox" data-plan="p1"><span>Python deri te OOP dhe venv.</span></label></li>
+        <li><label><input type="checkbox" data-plan="p2"><span>10 detyra Python pa hapur zgjidhjen.</span></label></li>
+        <li><label><input type="checkbox" data-plan="p2b"><span>8 detyra SQL + 6 API.</span></label></li>
+        <li><label><input type="checkbox" data-plan="p3"><span>CRUD FastAPI + Django model ne kok.</span></label></li>
+        <li><label><input type="checkbox" data-plan="p4"><span>REST status + SQL.</span></label></li>
+        <li><label><input type="checkbox" data-plan="p5"><span>Frontend fetch + Git PR.</span></label></li>
+        <li><label><input type="checkbox" data-plan="p6"><span>English me ze + kuizi.</span></label></li>
       </ul>
     </section>
   </main>
-  <footer>GitHub Pages: main branch, folder / (root) → https://rrezz1.github.io/tint/</footer>
+  <footer>Butoni Kryesore ne meny kthen ketu.</footer>
   <script src="js/app.js"></script>
 </body>
 </html>

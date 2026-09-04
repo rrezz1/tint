@@ -1,6 +1,6 @@
 const DEADLINE = new Date("2026-09-05T14:00:00");
 const LINKS = [
-  ["index.html", "Plan"],
+  ["index.html", "Kryesore"],
   ["python.html", "Python"],
   ["live.html", "Live kod"],
   ["detyra.html", "Detyra"],
