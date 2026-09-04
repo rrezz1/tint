@@ -11,22 +11,12 @@
 <body>
   <header class="top">
     <a class="brand" href="index.html">TINT <span>Borek</span></a>
-    <nav>
-      <a href="index.html">Plan</a>
-      <a href="python.html">Python</a>
-      <a href="frameworks.html">Django / FastAPI</a>
-      <a href="api.html">REST</a>
-      <a href="sql.html">SQL</a>
-      <a href="frontend.html">Frontend</a>
-      <a href="git.html">Git</a>
-      <a href="sjellja.html">Sjellja</a>
-      <a class="active" href="kuiz.html">Kuiz</a>
-    </nav>
+    <nav></nav>
   </header>
   <main class="wrap">
     <article class="page">
       <p class="kicker">Provo veten</p>
-      <h1>6 pyetje, si ne intervist</h1>
+      <h1>12 pyetje, si ne intervist</h1>
 
       <form class="q" data-quiz="b">
         <p><strong>1.</strong> <code>a = [1]; b = a; b.append(2)</code> — cfare eshte <code>a</code>?</p>
@@ -36,18 +26,18 @@
         <div><button type="submit">Kontrollo</button>
           <button type="button" class="alt" data-reveal="a1">Shpjegim</button></div>
         <p class="result"></p>
-        <p class="answer" id="a1">b dhe a jane e njejta liste. append ndryshon te dyja. Per kopje: a.copy().</p>
+        <p class="answer" id="a1">E njejta liste ne memorie. Kopje: a.copy().</p>
       </form>
 
       <form class="q" data-quiz="a">
-        <p><strong>2.</strong> Krijon user te ri. Cili status?</p>
+        <p><strong>2.</strong> Krijon user te ri. Status?</p>
         <label><input type="radio" name="a" value="a"> 201</label><br>
         <label><input type="radio" name="a" value="b"> 200 gjithmone</label><br>
         <label><input type="radio" name="a" value="c"> 500</label>
         <div><button type="submit">Kontrollo</button>
           <button type="button" class="alt" data-reveal="a2">Shpjegim</button></div>
         <p class="result"></p>
-        <p class="answer" id="a2">201 Created per burim te ri. 200 OK per lexime / update te suksesshem.</p>
+        <p class="answer" id="a2">201 Created. 200 per GET/update te suksesshem.</p>
       </form>
 
       <form class="q" data-quiz="c">
@@ -58,40 +48,106 @@
         <div><button type="submit">Kontrollo</button>
           <button type="button" class="alt" data-reveal="a3">Shpjegim</button></div>
         <p class="result"></p>
-        <p class="answer" id="a3">LEFT mban te gjithe users; ku nuk ka order, kolonat e order jane NULL.</p>
+        <p class="answer" id="a3">LEFT mban users; pa order → NULL.</p>
       </form>
 
       <form class="q" data-quiz="b">
         <p><strong>4.</strong> 401 vs 403?</p>
         <label><input type="radio" name="a" value="a"> njesoj</label><br>
-        <label><input type="radio" name="a" value="b"> 401 pa identitet, 403 identitet por pa leje</label><br>
+        <label><input type="radio" name="a" value="b"> 401 pa identitet, 403 pa leje</label><br>
         <label><input type="radio" name="a" value="c"> 403 eshte 404</label>
         <div><button type="submit">Kontrollo</button>
           <button type="button" class="alt" data-reveal="a4">Shpjegim</button></div>
         <p class="result"></p>
-        <p class="answer" id="a4">401 = login. 403 = je i loguar por s’ke role.</p>
+        <p class="answer" id="a4">401 login. 403 role.</p>
       </form>
 
       <form class="q" data-quiz="a">
-        <p><strong>5.</strong> Cfare eshte ORM?</p>
-        <label><input type="radio" name="a" value="a"> Objekti Python lidhet me rreshtin ne DB</label><br>
-        <label><input type="radio" name="a" value="b"> Nje CSS framework</label><br>
+        <p><strong>5.</strong> ORM?</p>
+        <label><input type="radio" name="a" value="a"> Objekt Python ↔ rresht DB</label><br>
+        <label><input type="radio" name="a" value="b"> CSS</label><br>
         <label><input type="radio" name="a" value="c"> Git remote</label>
         <div><button type="submit">Kontrollo</button>
           <button type="button" class="alt" data-reveal="a5">Shpjegim</button></div>
         <p class="result"></p>
-        <p class="answer" id="a5">Django ORM / SQLAlchemy. SQL raw mbetet per query te veshtira.</p>
+        <p class="answer" id="a5">Django ORM / SQLAlchemy.</p>
       </form>
 
       <form class="q" data-quiz="b">
-        <p><strong>6.</strong> N+1 problem?</p>
+        <p><strong>6.</strong> N+1?</p>
         <label><input type="radio" name="a" value="a"> Git conflict</label><br>
-        <label><input type="radio" name="a" value="b"> Shume query te vogla ne loop</label><br>
-        <label><input type="radio" name="a" value="c"> CSS cascade</label>
+        <label><input type="radio" name="a" value="b"> Shume query ne loop</label><br>
+        <label><input type="radio" name="a" value="c"> CSS</label>
         <div><button type="submit">Kontrollo</button>
           <button type="button" class="alt" data-reveal="a6">Shpjegim</button></div>
         <p class="result"></p>
-        <p class="answer" id="a6">1 liste + 1 query per cdo item. JOIN ose prefetch.</p>
+        <p class="answer" id="a6">JOIN ose prefetch.</p>
+      </form>
+
+      <form class="q" data-quiz="c">
+        <p><strong>7.</strong> Default <code>def f(x=[])</code>?</p>
+        <label><input type="radio" name="a" value="a"> praktike e mire</label><br>
+        <label><input type="radio" name="a" value="b"> vetem ne FastAPI</label><br>
+        <label><input type="radio" name="a" value="c"> lista ndahet midis thirrjeve — perdor None</label>
+        <div><button type="submit">Kontrollo</button>
+          <button type="button" class="alt" data-reveal="a7">Shpjegim</button></div>
+        <p class="result"></p>
+        <p class="answer" id="a7">Default mutable krijohet nje here.</p>
+      </form>
+
+      <form class="q" data-quiz="a">
+        <p><strong>8.</strong> Idempotent?</p>
+        <label><input type="radio" name="a" value="a"> GET/PUT/DELETE te perseritura nuk shtoje efekte te reja</label><br>
+        <label><input type="radio" name="a" value="b"> vetem POST</label><br>
+        <label><input type="radio" name="a" value="c"> emri i tabeles</label>
+        <div><button type="submit">Kontrollo</button>
+          <button type="button" class="alt" data-reveal="a8">Shpjegim</button></div>
+        <p class="result"></p>
+        <p class="answer" id="a8">POST dy here mund te krijoje dy rreshta.</p>
+      </form>
+
+      <form class="q" data-quiz="b">
+        <p><strong>9.</strong> <code>WHERE email = NULL</code>?</p>
+        <label><input type="radio" name="a" value="a"> gjen rreshtat pa email</label><br>
+        <label><input type="radio" name="a" value="b"> gabim — duhet IS NULL</label><br>
+        <label><input type="radio" name="a" value="c"> njesoj si != NULL</label>
+        <div><button type="submit">Kontrollo</button>
+          <button type="button" class="alt" data-reveal="a9">Shpjegim</button></div>
+        <p class="result"></p>
+        <p class="answer" id="a9">NULL nuk barazohet me =.</p>
+      </form>
+
+      <form class="q" data-quiz="a">
+        <p><strong>10.</strong> Migration?</p>
+        <label><input type="radio" name="a" value="a"> Ndryshim i schema DB i versionuar me kod</label><br>
+        <label><input type="radio" name="a" value="b"> git merge</label><br>
+        <label><input type="radio" name="a" value="c"> CSS animation</label>
+        <div><button type="submit">Kontrollo</button>
+          <button type="button" class="alt" data-reveal="a10">Shpjegim</button></div>
+        <p class="result"></p>
+        <p class="answer" id="a10">makemigrations + migrate.</p>
+      </form>
+
+      <form class="q" data-quiz="c">
+        <p><strong>11.</strong> fetch 404?</p>
+        <label><input type="radio" name="a" value="a"> gjithmone throw</label><br>
+        <label><input type="radio" name="a" value="b"> kthen 200</label><br>
+        <label><input type="radio" name="a" value="c"> nuk hedh, kontrollo res.ok</label>
+        <div><button type="submit">Kontrollo</button>
+          <button type="button" class="alt" data-reveal="a11">Shpjegim</button></div>
+        <p class="result"></p>
+        <p class="answer" id="a11">Vetem network fail hedh. HTTP error eshte res.ok false.</p>
+      </form>
+
+      <form class="q" data-quiz="b">
+        <p><strong>12.</strong> Docker image vs container?</p>
+        <label><input type="radio" name="a" value="a"> njesoj</label><br>
+        <label><input type="radio" name="a" value="b"> image receta, container procesi i ndezur</label><br>
+        <label><input type="radio" name="a" value="c"> image eshte GitHub</label>
+        <div><button type="submit">Kontrollo</button>
+          <button type="button" class="alt" data-reveal="a12">Shpjegim</button></div>
+        <p class="result"></p>
+        <p class="answer" id="a12">Nje image, shume container.</p>
       </form>
     </article>
   </main>

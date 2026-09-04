@@ -11,32 +11,58 @@
 <body>
   <header class="top">
     <a class="brand" href="index.html">TINT <span>Borek</span></a>
-    <nav>
-      <a href="index.html">Plan</a>
-      <a href="python.html">Python</a>
-      <a href="frameworks.html">Django / FastAPI</a>
-      <a href="api.html">REST</a>
-      <a href="sql.html">SQL</a>
-      <a href="frontend.html">Frontend</a>
-      <a class="active" href="git.html">Git</a>
-      <a href="sjellja.html">Sjellja</a>
-      <a href="kuiz.html">Kuiz</a>
-    </nav>
+    <nav></nav>
   </header>
   <main class="wrap">
     <article class="page">
-      <p class="kicker">Git, test, Docker</p>
-      <h1>Komandat dhe nje fjali bonus</h1>
-<pre>git clone
-git checkout -b feature/x
+      <p class="kicker">Git, test, Docker, CI</p>
+      <h1>Workflow qe e duan ne ekip</h1>
+<pre>git clone git@github.com:org/app.git
+git checkout -b feature/login
+# ... kod ...
+git status
+git diff
+git add -p   # ose git add file
+git commit -m "Add login validation"
+git push -u origin feature/login
+# hap Pull Request, dikush review, merge ne main</pre>
+      <p>Commit i mire: pse, jo “fix”. I vogel. Mos commit .env, secrets, node_modules, .venv.</p>
+      <p><code>.gitignore</code>: venv, __pycache__, .env, db.sqlite3.</p>
+
+      <h2>Fjalori</h2>
+      <ul>
+        <li>working tree / staging / commit</li>
+        <li>branch = linje pune</li>
+        <li>merge = bashko</li>
+        <li>rebase (shkurt): “e leviz historine mbi main” — nese s’e di, thuaj merge</li>
+        <li>stash: ndryshime te perkoheshme</li>
+      </ul>
+<pre>git pull origin main
+# conflict:
+# hap file, hiq &lt;&lt;&lt; ==== &gt;&gt;&gt;
 git add .
-git commit -m "mesazh i qarte"
-git push
-git pull</pre>
-      <p><strong>Conflict:</strong> hap file, hiq <code>&lt;&lt;&lt;</code>, mbaj kodin e duhur, <code>git add</code> pastaj commit. Mos puno drejtpërdrejt ne <code>main</code> nese ekipi perdor PR.</p>
-      <p><strong>Test:</strong> unit = funksion i izoluar. Integration = API + DB. Pytest me <code>assert</code>.</p>
-      <p><strong>Docker:</strong> pakete app + varesite, i njejti ambient local dhe server. Compose ngrit app + Postgres.</p>
-      <p><strong>CI/CD:</strong> cdo push ekzekuton test; nese kalojne, deploy.</p>
+git commit</pre>
+
+      <h2>Testim</h2>
+<pre># pytest
+def add(a, b):
+    return a + b
+
+def test_add():
+    assert add(2, 3) == 5</pre>
+      <p>Unit: funksion. Integration: client.test_client() ne FastAPI/Django, status 201. Fixture = te dhena gati. Coverage: sa rreshta testohen, jo cilesia e vetme.</p>
+
+      <h2>Docker</h2>
+<pre>FROM python:3.12-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0"]</pre>
+      <p>Image = receta e pjekur. Container = procesi. Compose: web + postgres + volume. Port 5432 ne container, ne host ndoshta 5433.</p>
+
+      <h2>CI/CD</h2>
+      <p>GitHub Actions: ne push, instalo, pytest, lint. Nese gjelber, deploy. CD = Continuous Deployment. Junior: “e kam pare, e kuptoj idene.”</p>
     </article>
   </main>
   <script src="js/app.js"></script>

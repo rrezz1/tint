@@ -1,4 +1,29 @@
 const DEADLINE = new Date("2026-09-05T14:00:00");
+const LINKS = [
+  ["index.html", "Plan"],
+  ["python.html", "Python"],
+  ["live.html", "Live kod"],
+  ["frameworks.html", "Django / FastAPI"],
+  ["api.html", "REST"],
+  ["sql.html", "SQL"],
+  ["frontend.html", "Frontend"],
+  ["git.html", "Git"],
+  ["debug.html", "Debug"],
+  ["sjellja.html", "Sjellja"],
+  ["anglisht.html", "English"],
+  ["kuiz.html", "Kuiz"],
+];
+
+(function nav() {
+  const nav = document.querySelector("header.top nav");
+  if (!nav) return;
+  const here = (location.pathname.split("/").pop() || "index.html").replace(/^\s*$/, "index.html");
+  const file = here || "index.html";
+  nav.innerHTML = LINKS.map(([href, label]) => {
+    const active = file === href || (file === "" && href === "index.html");
+    return '<a class="' + (active ? "active" : "") + '" href="' + href + '">' + label + "</a>";
+  }).join("");
+})();
 
 function pad(n) {
   return String(n).padStart(2, "0");

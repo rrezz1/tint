@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live kod — TINT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">TINT <span>Borek</span></a>
+    <nav></nav>
+  </header>
+  <main class="wrap">
+    <article class="page">
+      <p class="kicker">Whiteboard / laptop</p>
+      <h1>10 probleme. Mbyll ekranin e zgjidhjes, shkruaj ne leter, pastaj krahason.</h1>
+      <p class="note">Tech lead nuk do leetcode te veshtire. Do logjike te paster + emra te qarte + edge cases.</p>
+
+      <h2>1. Palindrome</h2>
+      <p>A eshte string palindrome? Injoro hapesirat dhe shkronjat e medha.</p>
+      <button type="button" class="alt" data-reveal="s1" style="margin:8px 0;background:#e8a54b;color:#1a140c;border:0;border-radius:999px;padding:8px 14px;font-weight:700;cursor:pointer;">Zgjidhja</button>
+      <div class="answer" id="s1">
+<pre>def is_palindrome(s):
+    t = "".join(ch.lower() for ch in s if ch.isalnum())
+    return t == t[::-1]</pre>
+        <p>Edge: string bosh → True. “A man a plan a canal Panama” → True.</p>
+      </div>
+
+      <h2>2. Dy shuma (Two sum)</h2>
+      <p>Lista numrash, target. Kthe indekset e dy numrave qe japin target.</p>
+      <button type="button" data-reveal="s2" style="margin:8px 0;background:#e8a54b;color:#1a140c;border:0;border-radius:999px;padding:8px 14px;font-weight:700;cursor:pointer;">Zgjidhja</button>
+      <div class="answer" id="s2">
+<pre>def two_sum(nums, target):
+    seen = {}
+    for i, n in enumerate(nums):
+        need = target - n
+        if need in seen:
+            return [seen[need], i]
+        seen[n] = i
+    return None</pre>
+        <p>O(n) me dict. Fol: “nuk bej dy for te ngulitura nese mundem.”</p>
+      </div>
+
+      <h2>3. Fjalori i shpeshtise</h2>
+      <p>Numro sa here shfaqet cdo fjale ne nje fjali.</p>
+      <button type="button" data-reveal="s3" style="margin:8px 0;background:#e8a54b;color:#1a140c;border:0;border-radius:999px;padding:8px 14px;font-weight:700;cursor:pointer;">Zgjidhja</button>
+      <div class="answer" id="s3">
+<pre>from collections import Counter
+
+def word_count(text):
+    words = text.lower().split()
+    return dict(Counter(words))</pre>
+        <p>Pa Counter: <code>d.setdefault(w, 0); d[w] += 1</code> ose <code>d[w] = d.get(w, 0) + 1</code>.</p>
+      </div>
+
+      <h2>4. Fshi duplikatet, mbaj rendin</h2>
+<pre>def unique(seq):
+    seen = set()
+    out = []
+    for x in seq:
+        if x not in seen:
+            seen.add(x)
+            out.append(x)
+    return out</pre>
+
+      <h2>5. Validim email i thjeshte</h2>
+      <p>Junior: nuk te duhet regex i plote. Kontrollo <code>@</code> dhe piken pas tij.</p>
+<pre>def looks_like_email(s):
+    if s.count("@") != 1:
+        return False
+    user, domain = s.split("@")
+    return bool(user) and "." in domain and not domain.startswith(".")</pre>
+
+      <h2>6. FizzBuzz (po, ende e pyesin)</h2>
+<pre>for i in range(1, 31):
+    if i % 15 == 0:
+        print("FizzBuzz")
+    elif i % 3 == 0:
+        print("Fizz")
+    elif i % 5 == 0:
+        print("Buzz")
+    else:
+        print(i)</pre>
+      <p>Kontrollo 15 PARA 3 dhe 5, perndryshe gabon.</p>
+
+      <h2>7. Flatten nje liste te ceket</h2>
+<pre>def flatten(rows):
+    return [item for row in rows for item in row]
+# [[1,2],[3]] → [1,2,3]</pre>
+
+      <h2>8. Gjej max pa max()</h2>
+<pre>def my_max(nums):
+    if not nums:
+        raise ValueError("lista bosh")
+    best = nums[0]
+    for n in nums[1:]:
+        if n > best:
+            best = n
+    return best</pre>
+
+      <h2>9. API mini: lista ne memorie</h2>
+      <p>Shkruaje me ze si FastAPI: lista <code>USERS = []</code>, POST shton dict me id, GET kthen listen, GET /id kthen 404 nese mungon.</p>
+<pre>from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+
+app = FastAPI()
+USERS = []
+_next = 1
+
+class UserIn(BaseModel):
+    name: str
+    email: str
+
+@app.get("/users")
+def list_users():
+    return USERS
+
+@app.get("/users/{uid}")
+def get_user(uid: int):
+    for u in USERS:
+        if u["id"] == uid:
+            return u
+    raise HTTPException(404, "not found")
+
+@app.post("/users", status_code=201)
+def create_user(body: UserIn):
+    global _next
+    u = {"id": _next, **body.model_dump()}
+    _next += 1
+    USERS.append(u)
+    return u</pre>
+
+      <h2>10. SQL ne koke, pastaj Python</h2>
+      <p>“Top 3 emaile me porosi me te shtrenjta.” Ne SQL:</p>
+<pre>SELECT u.email, SUM(o.total) AS spent
+FROM users u
+JOIN orders o ON o.user_id = u.id
+GROUP BY u.email
+ORDER BY spent DESC
+LIMIT 3;</pre>
+    </article>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+</html>

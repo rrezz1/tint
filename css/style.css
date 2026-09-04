@@ -54,7 +54,7 @@ a:hover { text-decoration: underline; }
 nav { display: flex; flex-wrap: wrap; gap: 8px 14px; }
 nav a {
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   text-decoration: none;
 }
 nav a.active, nav a:hover { color: var(--amber); }

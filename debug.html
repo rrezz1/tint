@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Debug — TINT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">TINT <span>Borek</span></a>
+    <nav></nav>
+  </header>
+  <main class="wrap">
+    <article class="page">
+      <p class="kicker">Kjo ndan juniorin e mire</p>
+      <h1>Si te debugosh me goje, pastaj 6 gabime klasike</h1>
+      <ol>
+        <li>Cfare pret te ndodhe? Cfare ndodh?</li>
+        <li>A riprodhohet gjithmone?</li>
+        <li>Lexo mesazhin e plote + stack trace (rreshti i fundit i kodit TEND eshte fillimi).</li>
+        <li>Izolo: print / logging / breakpoint. Nje ndryshim njehere.</li>
+        <li>Rregullo, provo perseri, shto test nese mundesh.</li>
+      </ol>
+
+      <h2>TypeError: unhashable type: 'list'</h2>
+      <p>Po e perdor listen si celes dict ose ne set. Celesi duhet immutable: tuple, str, int.</p>
+
+      <h2>KeyError / NoneType has no attribute</h2>
+      <p><code>data["user"]["name"]</code> kur mungon celesi. Perdor <code>.get("user") or {}</code> ose kontrollo None.</p>
+
+      <h2>CORS ne frontend</h2>
+      <p>Browser bllokon request nga origin tjeter. Backend duhet te lejoje origin (FastAPI CORSMiddleware). Nuk eshte “JS i gabuar” gjithmone.</p>
+
+      <h2>500 ne API, 200 ne Postman</h2>
+      <p>Dallimi: header Authorization, Content-Type, body JSON vs form. Krahason request-et.</p>
+
+      <h2>Migration dështon</h2>
+      <p>Schema lokale ≠ ajo qe pret kodi. <code>makemigrations</code> + <code>migrate</code>. Mos edito me dore tabelen nese ekipi perdor migrations.</p>
+
+      <h2>N+1 i ngadalte</h2>
+      <p>Faqja ngadale me 50 users. 1 query per users + 50 per orders. JOIN / select_related.</p>
+
+      <h2>Fjalori per “si e zgjidhe nje bug”</h2>
+      <p>Ne anglisht (mesoje): <em>“I reproduced it, read the stack trace, added a log around the null, found a missing key in the JSON, added validation and a test.”</em></p>
+    </article>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+</html>

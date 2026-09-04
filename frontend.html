@@ -11,32 +11,63 @@
 <body>
   <header class="top">
     <a class="brand" href="index.html">TINT <span>Borek</span></a>
-    <nav>
-      <a href="index.html">Plan</a>
-      <a href="python.html">Python</a>
-      <a href="frameworks.html">Django / FastAPI</a>
-      <a href="api.html">REST</a>
-      <a href="sql.html">SQL</a>
-      <a class="active" href="frontend.html">Frontend</a>
-      <a href="git.html">Git</a>
-      <a href="sjellja.html">Sjellja</a>
-      <a href="kuiz.html">Kuiz</a>
-    </nav>
+    <nav></nav>
   </header>
   <main class="wrap">
     <article class="page">
       <p class="kicker">HTML, CSS, JavaScript</p>
-      <h1>Baze e paster, mjafton per junior</h1>
+      <h1>Baza + cfare te thuash per React/Vue/Angular</h1>
+
+      <h2>HTML</h2>
+      <p>Semantike: <code>header nav main article footer button label</code>. Form: <code>input</code> me <code>name</code>, <code>label for</code>.</p>
+<pre>&lt;form&gt;
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input id="email" type="email" required&gt;
+  &lt;button type="submit"&gt;Dergo&lt;/button&gt;
+&lt;/form&gt;</pre>
+
+      <h2>CSS</h2>
       <ul>
-        <li>HTML = strukture. Perdor <code>header</code>, <code>nav</code>, <code>main</code>.</li>
-        <li>CSS box model: content + padding + border + margin.</li>
-        <li>Flex: rresht. Grid: tabele e lire. Responsive: <code>@media</code>.</li>
-        <li>JS: <code>const</code>/<code>let</code>, <code>map</code>/<code>filter</code>, <code>async/await</code>.</li>
+        <li>Box: content + padding + border + margin. <code>box-sizing: border-box</code> e ben gjerësinë te parashikueshme.</li>
+        <li>Flex: nje rresht/kolone, <code>justify-content</code>, <code>align-items</code>, <code>gap</code>.</li>
+        <li>Grid: dy dimensione, <code>grid-template-columns: 1fr 1fr</code>.</li>
+        <li>Responsive: <code>@media (max-width: 700px)</code>, <code>width: min(1100px, 100% - 32px)</code>.</li>
+        <li>Specificity: inline > id > class > tag. Mos inflato !important.</li>
       </ul>
-<pre>const res = await fetch("/api/users");
-const data = await res.json();</pre>
-      <p><strong>React (avantazh):</strong> komponent, props hyjne, state eshte e dhena lokale, <code>useEffect</code> per fetch. Nese nuk e di thelle, thuaj te verteten dhe nje shembull te vogel.</p>
-      <p class="note">Kjo faqe vet eshte shembull: HTML + CSS, pak JS per kuiz dhe countdown.</p>
+
+      <h2>JavaScript</h2>
+<pre>const nums = [1, 2, 3];
+const doubled = nums.map(n => n * 2);
+const evens = nums.filter(n => n % 2 === 0);
+const sum = nums.reduce((a, n) => a + n, 0);
+
+const el = document.querySelector("#app");
+el.textContent = "hi";
+
+document.querySelector("form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const res = await fetch("/api/users");
+  if (!res.ok) throw new Error("fail");
+  const data = await res.json();
+});</pre>
+      <p><code>==</code> vs <code>===</code>: perdor gjithmone ===. <code>let</code> block, <code>const</code> nuk ri-caktues. Mos <code>var</code>.</p>
+      <p>Promise: <code>.then</code> ose <code>async/await</code> + try/catch. Fetch nuk hedh per 404 — kontrollo <code>res.ok</code>.</p>
+      <p>JSON.parse / stringify. localStorage vetem string.</p>
+
+      <h2>React (avantazh)</h2>
+      <p>Komponent = funksion qe kthen UI. <strong>props</strong> hyjne nga prindi. <strong>state</strong> (useState) e dhena qe ndryshon UI. <strong>useEffect</strong> per fetch pas render.</p>
+<pre>function Users() {
+  const [list, setList] = React.useState([]);
+  React.useEffect(() => {
+    fetch("/api/users").then(r => r.json()).then(setList);
+  }, []);
+  return list.map(u => &lt;p key={u.id}&gt;{u.name}&lt;/p&gt;);
+}</pre>
+      <p><code>key</code> ne lista. Mos fetch pa array varësish — loop infinit.</p>
+      <p>Vue: template + data/ref. Angular: module/component/service, TypeScript. Nese s’i di, “kam HTML/JS, framework ne nivel tutorial.”</p>
+
+      <h2>Si lidhet me backend</h2>
+      <p>UI therret REST. Token ne memory ose httpOnly cookie (me e sigurt). CORS nese origina ndryshe.</p>
     </article>
   </main>
   <script src="js/app.js"></script>

@@ -11,43 +11,92 @@
 <body>
   <header class="top">
     <a class="brand" href="index.html">TINT <span>Borek</span></a>
-    <nav>
-      <a href="index.html">Plan</a>
-      <a href="python.html">Python</a>
-      <a href="frameworks.html">Django / FastAPI</a>
-      <a href="api.html">REST</a>
-      <a class="active" href="sql.html">SQL</a>
-      <a href="frontend.html">Frontend</a>
-      <a href="git.html">Git</a>
-      <a href="sjellja.html">Sjellja</a>
-      <a href="kuiz.html">Kuiz</a>
-    </nav>
+    <nav></nav>
   </header>
   <main class="wrap">
     <article class="page">
       <p class="kicker">PostgreSQL / MySQL</p>
-      <h1>Query qe duhet t’i shkruash pa Google</h1>
+      <h1>Schema, JOIN, ushtrime qe i japin ne tabele</h1>
+
+      <h2>Tabela shembull</h2>
+<pre>users(id, name, email, created_at)
+orders(id, user_id, total, created_at)
+order_items(id, order_id, product_id, qty, price)
+products(id, name, stock)</pre>
+      <p>1:N users→orders. N:M orders↔products permes order_items.</p>
+      <p>PK = id. FK = user_id referon users(id). UNIQUE ne email.</p>
+
+      <h2>CRUD</h2>
+<pre>INSERT INTO users (name, email) VALUES ('Ana', 'ana@x.com');
+SELECT id, email FROM users WHERE email = 'ana@x.com';
+UPDATE users SET name = 'Ana K' WHERE id = 1;
+DELETE FROM users WHERE id = 1;  -- kujdes FK</pre>
+
       <h2>JOIN</h2>
 <pre>SELECT u.name, o.total
 FROM users u
 INNER JOIN orders o ON o.user_id = u.id;</pre>
-      <p>INNER: vetem perputhjet. LEFT: te gjithe users, edhe pa porosi.</p>
+      <p>INNER: vetem me porosi. LEFT: te gjithe users.</p>
 <pre>SELECT u.id, u.name
 FROM users u
 LEFT JOIN orders o ON o.user_id = u.id
 WHERE o.id IS NULL;</pre>
-      <p>Kjo gjen userat pa porosi. Mesoje — vjen shpesh.</p>
-      <h2>Index, PK, FK, N+1</h2>
-      <ul>
-        <li><strong>PK</strong> identifikon rreshtin. <strong>FK</strong> lidh tabela.</li>
-        <li><strong>Index</strong> e shpejton WHERE/JOIN, e ngadaleson pak INSERT.</li>
-        <li><strong>N+1</strong>: 1 query per listen + 1 per cdo rresht. Zgjidhje: JOIN ose <code>select_related</code>.</li>
-        <li><strong>Transaksion</strong>: te gjitha ndryshimet ose asnje.</li>
-      </ul>
-<pre>SELECT DATE_TRUNC('month', created_at) AS muaj, COUNT(*)
+      <p>Userat pa porosi — e duan shpesh.</p>
+
+      <h2>GROUP BY</h2>
+<pre>SELECT user_id, COUNT(*) AS n, SUM(total) AS spent
 FROM orders
-GROUP BY 1
-ORDER BY 1;</pre>
+GROUP BY user_id
+HAVING SUM(total) > 100
+ORDER BY spent DESC;</pre>
+      <p>WHERE filtron rreshta para grupimit. HAVING pas.</p>
+
+      <h2>Index</h2>
+<pre>CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_orders_user ON orders(user_id);</pre>
+      <p>WHERE/JOIN te shpeshta. Shume index = INSERT me i ngadalte. PK zakonisht e ka.</p>
+
+      <h2>N+1</h2>
+      <p>50 users, pastaj SELECT orders WHERE user_id = ? 50 here. 1 JOIN ose IN (...).</p>
+
+      <h2>Transaksion</h2>
+<pre>BEGIN;
+UPDATE products SET stock = stock - 1 WHERE id = 9 AND stock > 0;
+INSERT INTO order_items (...);
+COMMIT;
+-- nese deshton: ROLLBACK;</pre>
+      <p>ACID shkurt: Atomic (te gjitha ose asnje), Consistent, Isolated, Durable.</p>
+
+      <h2>NULL</h2>
+      <p><code>WHERE x = NULL</code> nuk punon. <code>WHERE x IS NULL</code>.</p>
+
+      <h2>Ushtrime — shkruaji pa parë</h2>
+      <ol>
+        <li>Emrat e users te krijuar sot.</li>
+        <li>Totali i porosive per muaj.</li>
+        <li>Produktet qe nuk jane shitur kurre.</li>
+        <li>Useri me spent me te larte.</li>
+      </ol>
+      <button type="button" data-reveal="sqls" style="margin:8px 0;background:#e8a54b;color:#1a140c;border:0;border-radius:999px;padding:8px 14px;font-weight:700;cursor:pointer;">Zgjidhjet</button>
+      <div class="answer" id="sqls">
+<pre>SELECT name FROM users WHERE created_at::date = CURRENT_DATE;
+-- MySQL: DATE(created_at) = CURDATE()
+
+SELECT DATE_TRUNC('month', created_at) AS m, SUM(total)
+FROM orders GROUP BY 1 ORDER BY 1;
+
+SELECT p.name
+FROM products p
+LEFT JOIN order_items i ON i.product_id = p.id
+WHERE i.id IS NULL;
+
+SELECT u.email, SUM(o.total) AS spent
+FROM users u
+JOIN orders o ON o.user_id = u.id
+GROUP BY u.email
+ORDER BY spent DESC
+LIMIT 1;</pre>
+      </div>
     </article>
   </main>
   <script src="js/app.js"></script>

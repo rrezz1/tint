@@ -11,57 +11,132 @@
 <body>
   <header class="top">
     <a class="brand" href="index.html">TINT <span>Borek</span></a>
-    <nav>
-      <a href="index.html">Plan</a>
-      <a class="active" href="python.html">Python</a>
-      <a href="frameworks.html">Django / FastAPI</a>
-      <a href="api.html">REST</a>
-      <a href="sql.html">SQL</a>
-      <a href="frontend.html">Frontend</a>
-      <a href="git.html">Git</a>
-      <a href="sjellja.html">Sjellja</a>
-      <a href="kuiz.html">Kuiz</a>
-    </nav>
+    <nav></nav>
   </header>
   <main class="wrap">
     <article class="page">
       <p class="kicker">Gjuha kryesore e rolit</p>
-      <h1>Python qe te pyesin pothuajse gjithmone</h1>
+      <h1>Python i plote per junior full-stack</h1>
       <p class="note">Nese te japin kod, thuaj me ze cfare pret te printoje, pastaj ekzekuto ne kok.</p>
 
-      <h2>Struktura</h2>
+      <h2>1. Struktura</h2>
       <table>
         <tr><th>Tipi</th><th>Cfare eshte</th><th>Shembull</th></tr>
         <tr><td><code>list</code></td><td>E renditur, ndryshohet</td><td><code>[1, 2]</code></td></tr>
         <tr><td><code>tuple</code></td><td>E renditur, nuk ndryshohet</td><td><code>(1, 2)</code></td></tr>
-        <tr><td><code>dict</code></td><td>Celes → vlerë</td><td><code>{"id": 1}</code></td></tr>
+        <tr><td><code>dict</code></td><td>Celes → vlere</td><td><code>{"id": 1}</code></td></tr>
         <tr><td><code>set</code></td><td>Unike, pa rend</td><td><code>{1, 2}</code></td></tr>
       </table>
+      <p>Lista: <code>append, pop, slicing nums[1:3]</code>. Dict: <code>d.get("k", default)</code> me i sigurt se <code>d["k"]</code>.</p>
 
-      <h2>Kurthi i copies</h2>
+      <h2>2. Kurthi i copies</h2>
 <pre>a = [1, 2, 3]
 b = a
 b.append(4)
-print(a)   # [1, 2, 3, 4]  e njejta liste</pre>
+print(a)   # [1, 2, 3, 4]</pre>
       <p>Kopje e ceket: <code>b = a.copy()</code>. Default <code>def f(x=[])</code> eshte gabim — perdor <code>None</code>.</p>
+<pre>def add_item(x=None):
+    if x is None:
+        x = []
+    x.append(1)
+    return x</pre>
 
-      <h2>*args dhe **kwargs</h2>
+      <h2>3. *args, **kwargs, unpacking</h2>
 <pre>def log(msg, *args, **kwargs):
     print(msg, args, kwargs)
 
-log("hi", 1, 2, level="info")</pre>
+log("hi", 1, 2, level="info")
+# kwargs = {"level": "info"}</pre>
+      <p><code>*lista</code> hap listen si argumente. <code>**dict</code> hap si keyword.</p>
 
-      <h2>Comprehension dhe exception</h2>
+      <h2>4. Comprehension, map, filter</h2>
 <pre>even = [n for n in range(10) if n % 2 == 0]
-try:
+names = [u["name"] for u in users]
+# set comprehension {x.lower() for x in words}</pre>
+
+      <h2>5. Exception</h2>
+<pre>try:
     int("x")
 except ValueError as e:
     print("nuk eshte numer")
+except Exception:
+    print("dicka tjeter")
 finally:
     print("mbyllet gjithmone")</pre>
+      <p>Kap gabimin konkret, jo gjithmone <code>Exception</code> bosh. <code>raise ValueError("email i keq")</code> kur input nuk vlen.</p>
 
-      <h2>Cfare te thuash nese pyesin GIL</h2>
-      <p>Nje thread ekzekuton bytecode Python. Per I/O (API, DB) threads ndihmojne. Per CPU te rende: procese te ndara.</p>
+      <h2>6. File, JSON, context manager</h2>
+<pre>import json
+
+with open("data.json", "r", encoding="utf-8") as f:
+    data = json.load(f)
+
+with open("out.json", "w") as f:
+    json.dump(data, f, indent=2)</pre>
+      <p><code>with</code> e mbyll file edhe nese ndodh gabim. Kjo eshte context manager.</p>
+
+      <h2>7. OOP — klasa</h2>
+<pre>class User:
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+
+    def display(self):
+        return f"{self.name} &lt;{self.email}&gt;"
+
+class Admin(User):
+    def display(self):
+        return "ADMIN " + super().display()</pre>
+      <p><code>self</code> = instanca. <code>__init__</code> constructor. Trashigimi: Admin eshte User. <code>super()</code> therret prindin.</p>
+      <p><strong>Encapsulation:</strong> <code>_email</code> konventa “internal”. <code>@property</code> per getter.</p>
+<pre>class Account:
+    def __init__(self):
+        self._balance = 0
+
+    @property
+    def balance(self):
+        return self._balance</pre>
+      <p><strong>classmethod / staticmethod:</strong> classmethod merr <code>cls</code> (fabrike). staticmethod nuk merr self — funksion brenda klases.</p>
+
+      <h2>8. Dunder te shpeshta</h2>
+      <ul>
+        <li><code>__str__</code> — print i bukur</li>
+        <li><code>__repr__</code> — per debug</li>
+        <li><code>__eq__</code> — krahasim ==</li>
+        <li><code>__len__</code> — len(obj)</li>
+      </ul>
+
+      <h2>9. Generator vs liste</h2>
+<pre>def count():
+    n = 0
+    while n &lt; 3:
+        yield n
+        n += 1
+# nuk mban gjithcka ne RAM, jep nje nga nje</pre>
+      <p><code>range</code> eshte lazy. Liste comprehension krijon listen e plote.</p>
+
+      <h2>10. Virtualenv dhe pip</h2>
+<pre>python -m venv .venv
+source .venv/bin/activate   # mac/linux
+pip install fastapi uvicorn
+pip freeze > requirements.txt</pre>
+      <p>Izolon paketat e projektit nga Python i sistemit. Kete duhet ta dish.</p>
+
+      <h2>11. Typing (FastAPI e do)</h2>
+<pre>from typing import Optional, List
+
+def find(uid: int) -> Optional[dict]:
+    ...
+
+def labels() -> List[str]:
+    return ["a"]</pre>
+
+      <h2>12. GIL</h2>
+      <p>Nje thread ekzekuton bytecode Python. I/O: threads ndihmojne. CPU: multiprocessing.</p>
+
+      <h2>13. Truthy / Falsy</h2>
+      <p>Falsy: <code>0, "", [], {}, None, False</code>. <code>if not items:</code> per liste bosh.</p>
+      <p>Mos perdor <code>if x:</code> per te dalluar <code>0</code> nga <code>None</code> — perdor <code>if x is None</code>.</p>
     </article>
   </main>
   <script src="js/app.js"></script>

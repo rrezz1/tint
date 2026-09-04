@@ -11,47 +11,62 @@
 <body>
   <header class="top">
     <a class="brand" href="index.html">TINT <span>Borek</span></a>
-    <nav>
-      <a href="index.html">Plan</a>
-      <a href="python.html">Python</a>
-      <a href="frameworks.html">Django / FastAPI</a>
-      <a class="active" href="api.html">REST</a>
-      <a href="sql.html">SQL</a>
-      <a href="frontend.html">Frontend</a>
-      <a href="git.html">Git</a>
-      <a href="sjellja.html">Sjellja</a>
-      <a href="kuiz.html">Kuiz</a>
-    </nav>
+    <nav></nav>
   </header>
   <main class="wrap">
     <article class="page">
       <p class="kicker">Kerkese kryesore e JD</p>
-      <h1>REST: metoda, status, dizajn</h1>
-      <p><strong>Stateless:</strong> cdo request mban auth dhe te dhenat. Serveri nuk mban “ku mbeta” ne kujtese.</p>
+      <h1>REST si ta shpjegosh dhe si ta dizajnosh</h1>
+      <p><strong>Resource</strong> = send (user, order), jo veprim. URL emër, metoda veprim.</p>
+      <p>Keq: <code>POST /createUser</code>. Mire: <code>POST /users</code>.</p>
+      <p><strong>Stateless:</strong> cdo request mban auth. Serveri nuk mban “ku mbeta”.</p>
+
+      <h2>Metodat</h2>
       <table>
-        <tr><th>Metoda</th><th>Kuptimi</th></tr>
-        <tr><td>GET</td><td>Lexo, mos ndrysho</td></tr>
-        <tr><td>POST</td><td>Krijo</td></tr>
-        <tr><td>PUT / PATCH</td><td>Ndrysho (i plote / pjesor)</td></tr>
-        <tr><td>DELETE</td><td>Fshi</td></tr>
+        <tr><th>Metoda</th><th>Kuptimi</th><th>Idempotent?</th></tr>
+        <tr><td>GET</td><td>Lexo</td><td>Po</td></tr>
+        <tr><td>POST</td><td>Krijo</td><td>Zakonisht jo</td></tr>
+        <tr><td>PUT</td><td>Zevendeso te plote</td><td>Po</td></tr>
+        <tr><td>PATCH</td><td>Ndrysho disa fusha</td><td>Shpesh po</td></tr>
+        <tr><td>DELETE</td><td>Fshi</td><td>Po (fshi 2 here → 404 ose 204)</td></tr>
       </table>
+
+      <h2>Status — mesoji</h2>
       <table>
         <tr><th>Kod</th><th>Kur</th></tr>
-        <tr><td>200</td><td>OK</td></tr>
-        <tr><td>201</td><td>U krijua</td></tr>
-        <tr><td>400</td><td>Input i keq</td></tr>
-        <tr><td>401</td><td>Pa login</td></tr>
-        <tr><td>403</td><td>Nuk ke te drejte</td></tr>
-        <tr><td>404</td><td>Nuk u gjet</td></tr>
-        <tr><td>500</td><td>Gabim serveri</td></tr>
+        <tr><td>200</td><td>OK, kthe body</td></tr>
+        <tr><td>201</td><td>U krijua, shpesh me Location ose objektin</td></tr>
+        <tr><td>204</td><td>OK pa body (delete)</td></tr>
+        <tr><td>400</td><td>JSON / validim i keq</td></tr>
+        <tr><td>401</td><td>Nuk je i loguar</td></tr>
+        <tr><td>403</td><td>I loguar, s’ke leje</td></tr>
+        <tr><td>404</td><td>Nuk ekziston</td></tr>
+        <tr><td>409</td><td>Konflikt (email i zene)</td></tr>
+        <tr><td>422</td><td>Semantike e keqe (FastAPI/Pydantic)</td></tr>
+        <tr><td>429</td><td>Shume requests</td></tr>
+        <tr><td>500</td><td>Bug ne server — mos e fshih me 200</td></tr>
       </table>
-      <h2>Si ta thuash per users</h2>
-      <pre>GET    /users
-GET    /users/12
-POST   /users
-PATCH  /users/12
-DELETE /users/12</pre>
-      <p>Validim, pagination, mos kthe password. Email unik → 400 ose 409. Idempotent: GET/PUT/DELETE te perseritura; POST zakonisht jo.</p>
+
+      <h2>Users API — thuaje me ze</h2>
+<pre>GET    /api/v1/users?page=1&amp;limit=20
+GET    /api/v1/users/12
+POST   /api/v1/users
+PATCH  /api/v1/users/12
+DELETE /api/v1/users/12</pre>
+      <p>Body POST: <code>{"email":"...","name":"..."}</code>. Kurr password ne GET. Hash ne DB.</p>
+      <p>Gabim i qarte: <code>{"detail": "email already used"}</code> jo HTML 500.</p>
+
+      <h2>Pagination</h2>
+      <p><code>?page=2&amp;page_size=20</code> ose cursor. Kthe <code>count</code> + <code>results</code>. Pa pagination, tabela e madhe e vret API.</p>
+
+      <h2>Versionim dhe filter</h2>
+      <p><code>/api/v1/</code> nese prish kontraten. Filter: <code>/users?is_active=true</code>.</p>
+
+      <h2>Headers</h2>
+      <p><code>Content-Type: application/json</code>. Auth: <code>Authorization: Bearer TOKEN</code> ose cookie session.</p>
+
+      <h2>Nuk eshte REST, por te pyesin</h2>
+      <p>GraphQL: nje endpoint, klienti zgjedh fushat. WebSocket: realtime. Junior: “i di, nuk i kam thelle.”</p>
     </article>
   </main>
   <script src="js/app.js"></script>

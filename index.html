@@ -11,108 +11,48 @@
 <body>
   <header class="top">
     <a class="brand" href="index.html">TINT <span>Borek</span></a>
-    <nav>
-      <a class="active" href="index.html">Plan</a>
-      <a href="python.html">Python</a>
-      <a href="frameworks.html">Django / FastAPI</a>
-      <a href="api.html">REST</a>
-      <a href="sql.html">SQL</a>
-      <a href="frontend.html">Frontend</a>
-      <a href="git.html">Git</a>
-      <a href="sjellja.html">Sjellja</a>
-      <a href="kuiz.html">Kuiz</a>
-    </nav>
+    <nav></nav>
   </header>
 
   <main class="wrap">
     <section class="hero">
-      <p class="kicker">Junior Python Full-Stack · Prishtine</p>
-      <h1>Pergatitja per Laiden, deri neser ne oren 14:00</h1>
-      <p class="lead">Faqe e lehte per te mesuar ate qe kerkon Borek: Python, API, databaze, HTML/CSS/JS, Git. Fol me ze. Mos memorizo fjaline, kuptim e idene.</p>
+      <p class="kicker">Junior Python Full-Stack · Borek · Prishtine</p>
+      <h1>Material i plote per Laiden, deri neser ora 14:00</h1>
+      <p class="lead">Python OOP, live kod, Django/FastAPI, REST, SQL, frontend, Git/Docker, debug, anglisht, kuiz. Fol me ze. Mos memorizo rresht per rresht.</p>
       <div class="clock">
         <div class="chip" data-countdown>Duke llogaritur...</div>
-        <div class="chip">Intervista me <b>tech lead Laiden</b></div>
-        <div class="chip">Paga e diskutuar: <b>950 €</b></div>
+        <div class="chip">Live: <b>rrezz1.github.io/tint</b></div>
+        <div class="chip">Paga: <b>950 €</b></div>
       </div>
     </section>
 
     <section class="grid">
-      <a class="card" href="python.html">
-        <div class="meta">1 · 45 min</div>
-        <h2>Python</h2>
-        <p>Lista, dict, copy, args, gabimet klasike qe i pyesin juniorët.</p>
-      </a>
-      <a class="card" href="frameworks.html">
-        <div class="meta">2 · 40 min</div>
-        <h2>Django / FastAPI</h2>
-        <p>Cikli request, ORM, migration. Fol nje framework, jo te tre.</p>
-      </a>
-      <a class="card" href="api.html">
-        <div class="meta">3 · 30 min</div>
-        <h2>REST API</h2>
-        <p>GET POST status codes. Dizajno /users me goje.</p>
-      </a>
-      <a class="card" href="sql.html">
-        <div class="meta">4 · 40 min</div>
-        <h2>SQL</h2>
-        <p>JOIN, index, N+1, query qe i japin ne tabele.</p>
-      </a>
-      <a class="card" href="frontend.html">
-        <div class="meta">5 · 30 min</div>
-        <h2>HTML CSS JS</h2>
-        <p>Box model, flex, fetch. Mjafton baze e paster.</p>
-      </a>
-      <a class="card" href="git.html">
-        <div class="meta">6 · 20 min</div>
-        <h2>Git + Docker</h2>
-        <p>Branch, conflict, nje fjali per Docker dhe testim.</p>
-      </a>
+      <a class="card" href="python.html"><div class="meta">1 · 70 min</div><h2>Python</h2><p>Struktura, copy, OOP, file, venv, GIL, typing.</p></a>
+      <a class="card" href="live.html"><div class="meta">2 · 80 min</div><h2>Live kod</h2><p>10 probleme: palindrome, two sum, FizzBuzz, mini API.</p></a>
+      <a class="card" href="frameworks.html"><div class="meta">3 · 50 min</div><h2>Django / FastAPI</h2><p>MVT, ORM, migration, Pydantic, Flask nje file.</p></a>
+      <a class="card" href="api.html"><div class="meta">4 · 40 min</div><h2>REST</h2><p>Status, pagination, 401/403, dizajn /users.</p></a>
+      <a class="card" href="sql.html"><div class="meta">5 · 50 min</div><h2>SQL</h2><p>JOIN, GROUP BY, index, 4 ushtrime me zgjidhje.</p></a>
+      <a class="card" href="frontend.html"><div class="meta">6 · 35 min</div><h2>Frontend</h2><p>HTML/CSS/JS, fetch, React ne nje paragraf.</p></a>
+      <a class="card" href="git.html"><div class="meta">7 · 25 min</div><h2>Git + Docker</h2><p>PR, conflict, pytest, Dockerfile.</p></a>
+      <a class="card" href="debug.html"><div class="meta">8 · 20 min</div><h2>Debug</h2><p>Stack trace, CORS, N+1, NoneType.</p></a>
+      <a class="card" href="sjellja.html"><div class="meta">9 · 20 min</div><h2>Sjellja</h2><p>STAR, projekt, paga, pyetje per ta.</p></a>
+      <a class="card" href="anglisht.html"><div class="meta">10 · 20 min</div><h2>English</h2><p>Fjali te gatshme per t’i thene neser.</p></a>
+      <a class="card" href="kuiz.html"><div class="meta">11 · 25 min</div><h2>Kuiz</h2><p>12 pyetje me shpjegim.</p></a>
     </section>
 
     <section class="plan">
-      <h2>Lista deri ne oren 2</h2>
-      <p class="lead">Sheno cfare ke perfunduar. Ruhet ne shfletues.</p>
+      <h2>Lista — sheno cfare ke mbaruar</h2>
       <ul>
-        <li>
-          <label>
-            <input type="checkbox" data-plan="p1">
-            <span>Python: list vs dict, copy, *args. <small>python.html · fol shembullin me append</small></span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" data-plan="p2">
-            <span>Nje CRUD me FastAPI ose Django ne kok. <small>frameworks.html</small></span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" data-plan="p3">
-            <span>REST: 7 status codes + dizajn /users. <small>api.html</small></span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" data-plan="p4">
-            <span>SQL: INNER, LEFT, usera pa porosi. <small>sql.html</small></span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" data-plan="p5">
-            <span>Frontend + Git ne 20 minuta. <small>frontend.html, git.html</small></span>
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" data-plan="p6">
-            <span>Historia e projektit + kuizi. <small>sjellja.html, kuiz.html</small></span>
-          </label>
-        </li>
+        <li><label><input type="checkbox" data-plan="p1"><span>Python deri te OOP dhe venv. <small>python.html</small></span></label></li>
+        <li><label><input type="checkbox" data-plan="p2"><span>5 probleme live pa hapur zgjidhjen. <small>live.html</small></span></label></li>
+        <li><label><input type="checkbox" data-plan="p3"><span>CRUD FastAPI + Django model ne kok. <small>frameworks.html</small></span></label></li>
+        <li><label><input type="checkbox" data-plan="p4"><span>REST status + SQL 4 ushtrimet. <small>api.html, sql.html</small></span></label></li>
+        <li><label><input type="checkbox" data-plan="p5"><span>Frontend fetch + Git PR. <small>frontend.html, git.html</small></span></label></li>
+        <li><label><input type="checkbox" data-plan="p6"><span>English me ze + kuizi 12. <small>anglisht.html, kuiz.html</small></span></label></li>
       </ul>
     </section>
   </main>
-  <footer>Hape index.html ne shfletues. Nuk duhet server.</footer>
+  <footer>GitHub Pages: main branch, folder / (root) → https://rrezz1.github.io/tint/</footer>
   <script src="js/app.js"></script>
 </body>
 </html>
