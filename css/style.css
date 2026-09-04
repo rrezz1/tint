@@ -192,6 +192,24 @@ th { color: var(--amber); font-weight: 600; }
 }
 .answer { display: none; margin-top: 10px; color: var(--muted); }
 .answer.show { display: block; }
+
+.task {
+  border-top: 1px solid var(--line);
+  padding: 18px 0 8px;
+}
+.task:first-of-type { border-top: 0; }
+.reveal-btn {
+  margin: 6px 0 4px;
+  background: var(--amber);
+  color: #1a140c;
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+.toc a { margin-right: 14px; }
 .good { color: var(--green); }
 .bad { color: var(--red); }
 

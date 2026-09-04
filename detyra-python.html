@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detyra Python — TINT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">TINT <span>Borek</span></a>
+    <nav></nav>
+  </header>
+  <main class="wrap">
+    <article class="page">
+      <p class="kicker"><a href="detyra.html">← te gjitha detyrat</a></p>
+      <h1>20 detyra Python + zgjidhje</h1>
+
+      <div class="task">
+        <h2>P1. Kthe stringun mbrapsht</h2>
+        <p><code>rev("Borek") → "keroB"</code></p>
+        <button type="button" class="reveal-btn" data-reveal="p1">Zgjidhja</button>
+        <div class="answer" id="p1"><pre>def rev(s):
+    return s[::-1]</pre>
+        <p>Pa slice: loop nga fundi, shto ne liste, <code>"".join</code>.</p></div>
+      </div>
+
+      <div class="task">
+        <h2>P2. Numro zanoret</h2>
+        <p>a e i o u, ignore case.</p>
+        <button type="button" class="reveal-btn" data-reveal="p2">Zgjidhja</button>
+        <div class="answer" id="p2"><pre>def vowels(s):
+    return sum(1 for ch in s.lower() if ch in "aeiou")</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>P3. Faktorial</h2>
+        <p>n!  Iterativ, jo rekursiv i thelle.</p>
+        <button type="button" class="reveal-btn" data-reveal="p3">Zgjidhja</button>
+        <div class="answer" id="p3"><pre>def factorial(n):
+    if n &lt; 0:
+        raise ValueError("n negativ")
+    out = 1
+    for i in range(2, n + 1):
+        out *= i
+    return out</pre>
+        <p>0! = 1. Fol kete edge.</p></div>
+      </div>
+
+      <div class="task">
+        <h2>P4. Fibonacci n-te</h2>
+        <p>0, 1, 1, 2, 3, 5… kthe F(n).</p>
+        <button type="button" class="reveal-btn" data-reveal="p4">Zgjidhja</button>
+        <div class="answer" id="p4"><pre>def fib(n):
+    if n &lt; 0:
+        raise ValueError("n")
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a + b
+    return a</pre>
+        <p>Mos bej rekursion te dyfishte pa memo — O(2^n).</p></div>
+      </div>
+
+      <div class="task">
+        <h2>P5. Anagram</h2>
+        <p><code>listen, silent → True</code>. Injoro hapesira/case.</p>
+        <button type="button" class="reveal-btn" data-reveal="p5">Zgjidhja</button>
+        <div class="answer" id="p5"><pre>def is_anagram(a, b):
+    def norm(s):
+        return sorted(ch.lower() for ch in s if ch.isalnum())
+    return norm(a) == norm(b)</pre>
+        <p>Ose Counter.</p></div>
+      </div>
+
+      <div class="task">
+        <h2>P6. I dyti me i madh</h2>
+        <p>Lista numrash. Nese te gjithe baraz, kthe None.</p>
+        <button type="button" class="reveal-btn" data-reveal="p6">Zgjidhja</button>
+        <div class="answer" id="p6"><pre>def second_max(nums):
+    uniq = sorted(set(nums), reverse=True)
+    return uniq[1] if len(uniq) &gt; 1 else None</pre>
+        <p>set heq duplikatet. Fol: [5,5,5] → None.</p></div>
+      </div>
+
+      <div class="task">
+        <h2>P7. Parentheses valide</h2>
+        <p><code>"()[]{}"</code> True. <code>"(]"</code> False.</p>
+        <button type="button" class="reveal-btn" data-reveal="p7">Zgjidhja</button>
+        <div class="answer" id="p7"><pre>def valid(s):
+    pair = {")": "(", "]": "[", "}": "{"}
+    st = []
+    for ch in s:
+        if ch in "([{":
+            st.append(ch)
+        elif ch in pair:
+            if not st or st[-1] != pair[ch]:
+                return False
+            st.pop()
+    return not st</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>P8. Numri qe mungon</h2>
+        <p>Lista me numra 1..n, mungon nje. Gjeje. Shembull: n=5, [1,2,4,5] → 3.</p>
+        <button type="button" class="reveal-btn" data-reveal="p8">Zgjidhja</button>
+        <div class="answer" id="p8"><pre>def missing(nums, n):
+    return n * (n + 1) // 2 - sum(nums)</pre>
+        <p>Ose <code>set(range(1,n+1)) - set(nums)</code>.</p></div>
+      </div>
+
+      <div class="task">
+        <h2>P9. Fjala me e shpeshte</h2>
+        <button type="button" class="reveal-btn" data-reveal="p9">Zgjidhja</button>
+        <div class="answer" id="p9"><pre>from collections import Counter
+
+def top_word(text):
+    words = text.lower().split()
+    if not words:
+        return None
+    return Counter(words).most_common(1)[0][0]</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>P10. Chunk liste</h2>
+        <p><code>chunk([1,2,3,4,5], 2) → [[1,2],[3,4],[5]]</code></p>
+        <button type="button" class="reveal-btn" data-reveal="p10">Zgjidhja</button>
+        <div class="answer" id="p10"><pre>def chunk(xs, size):
+    return [xs[i:i + size] for i in range(0, len(xs), size)]</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>P11. Kthe dict (value → key)</h2>
+        <p>Nese vlera perseritet, e fundit fiton. Fol kete.</p>
+        <button type="button" class="reveal-btn" data-reveal="p11">Zgjidhja</button>
+        <div class="answer" id="p11"><pre>def invert(d):
+    return {v: k for k, v in d.items()}</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>P12. snake_case → camelCase</h2>
+        <p><code>user_name → userName</code></p>
+        <button type="button" class="reveal-btn" data-reveal="p12">Zgjidhja</button>
+        <div class="answer" id="p12"><pre>def to_camel(s):
+    parts = s.split("_")
+    return parts[0] + "".join(p.title() for p in parts[1:])</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>P13. Merge dy lista te renditura</h2>
+        <button type="button" class="reveal-btn" data-reveal="p13">Zgjidhja</button>
+        <div class="answer" id="p13"><pre>def merge(a, b):
+    i = j = 0
+    out = []
+    while i &lt; len(a) and j &lt; len(b):
+        if a[i] &lt;= b[j]:
+            out.append(a[i]); i += 1
+        else:
+            out.append(b[j]); j += 1
+    return out + a[i:] + b[j:]</pre>
+        <p>Mos <code>sorted(a+b)</code> nese duan O(n) me pointer.</p></div>
+      </div>
+
+      <div class="task">
+        <h2>P14. Filter users aktiv</h2>
+        <p>Lista dict: <code>{"name","active"}</code>. Kthe emrat aktiv.</p>
+        <button type="button" class="reveal-btn" data-reveal="p14">Zgjidhja</button>
+        <div class="answer" id="p14"><pre>def active_names(users):
+    return [u["name"] for u in users if u.get("active")]</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>P15. Klasa BankAccount</h2>
+        <p>deposit, withdraw (mos lejo minus), balance property.</p>
+        <button type="button" class="reveal-btn" data-reveal="p15">Zgjidhja</button>
+        <div class="answer" id="p15"><pre>class BankAccount:
+    def __init__(self):
+        self._balance = 0
+
+    @property
+    def balance(self):
+        return self._balance
+
+    def deposit(self, amount):
+        if amount &lt;= 0:
+            raise ValueError("amount")
+        self._balance += amount
+
+    def withdraw(self, amount):
+        if amount &lt;= 0 or amount &gt; self._balance:
+            raise ValueError("funds")
+        self._balance -= amount</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>P16. Parse CSV rresht</h2>
+        <p><code>"Ana,28,Prishtina"</code> → dict name, age (int), city.</p>
+        <button type="button" class="reveal-btn" data-reveal="p16">Zgjidhja</button>
+        <div class="answer" id="p16"><pre>def parse_row(line):
+    name, age, city = [p.strip() for p in line.split(",")]
+    return {"name": name, "age": int(age), "city": city}</pre>
+        <p>Edge: rresht me presje te gabuar → ValueError. Fol try/except.</p></div>
+      </div>
+
+      <div class="task">
+        <h2>P17. Dedup email (case insensitive)</h2>
+        <p>Mbaj rendin e pare.</p>
+        <button type="button" class="reveal-btn" data-reveal="p17">Zgjidhja</button>
+        <div class="answer" id="p17"><pre>def unique_emails(emails):
+    seen = set()
+    out = []
+    for e in emails:
+        key = e.lower()
+        if key not in seen:
+            seen.add(key)
+            out.append(e)
+    return out</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>P18. Retry 3 here</h2>
+        <p>Therret fn(). Nese hedh, provo perseri. Nese 3 fail, raise.</p>
+        <button type="button" class="reveal-btn" data-reveal="p18">Zgjidhja</button>
+        <div class="answer" id="p18"><pre>def retry(fn, times=3):
+    last = None
+    for _ in range(times):
+        try:
+            return fn()
+        except Exception as e:
+            last = e
+    raise last</pre>
+        <p>Urdher per API te brishte. Fol: mos fshih gabimin perherë.</p></div>
+      </div>
+
+      <div class="task">
+        <h2>P19. Pytest per P1</h2>
+        <p>Shkruaj 3 assert.</p>
+        <button type="button" class="reveal-btn" data-reveal="p19">Zgjidhja</button>
+        <div class="answer" id="p19"><pre>def test_rev():
+    assert rev("") == ""
+    assert rev("ab") == "ba"
+    assert rev("Borek") == "keroB"</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>P20. Cfare printon?</h2>
+<pre>def f(x, items=[]):
+    items.append(x)
+    return items
+print(f(1), f(2))</pre>
+        <button type="button" class="reveal-btn" data-reveal="p20">Zgjidhja</button>
+        <div class="answer" id="p20">
+        <p><code>[1, 2] [1, 2]</code> — e njejta liste default. Pergjigjja e duhur ne intervist: “mutable default, gabim, perdor None.”</p></div>
+      </div>
+    </article>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+</html>

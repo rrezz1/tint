@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detyra SQL — TINT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">TINT <span>Borek</span></a>
+    <nav></nav>
+  </header>
+  <main class="wrap">
+    <article class="page">
+      <p class="kicker"><a href="detyra.html">← te gjitha detyrat</a></p>
+      <h1>16 detyra SQL + zgjidhje</h1>
+      <p>Schema:</p>
+<pre>users(id, name, email, created_at)
+orders(id, user_id, total, status, created_at)
+order_items(id, order_id, product_id, qty, price)
+products(id, name, stock)</pre>
+
+      <div class="task">
+        <h2>S1. Te gjithe users, vetem id dhe email</h2>
+        <button type="button" class="reveal-btn" data-reveal="s1">Zgjidhja</button>
+        <div class="answer" id="s1"><pre>SELECT id, email FROM users;</pre></div>
+      </div>
+      <div class="task">
+        <h2>S2. Users me email @gmail.com</h2>
+        <button type="button" class="reveal-btn" data-reveal="s2">Zgjidhja</button>
+        <div class="answer" id="s2"><pre>SELECT * FROM users WHERE email ILIKE '%@gmail.com';
+-- MySQL: LOWER(email) LIKE '%@gmail.com'</pre></div>
+      </div>
+      <div class="task">
+        <h2>S3. Porosi mbi 50, te renditura zbritje</h2>
+        <button type="button" class="reveal-btn" data-reveal="s3">Zgjidhja</button>
+        <div class="answer" id="s3"><pre>SELECT * FROM orders WHERE total &gt; 50 ORDER BY total DESC;</pre></div>
+      </div>
+      <div class="task">
+        <h2>S4. Emri i user + totali i porosisë</h2>
+        <button type="button" class="reveal-btn" data-reveal="s4">Zgjidhja</button>
+        <div class="answer" id="s4"><pre>SELECT u.name, o.total
+FROM users u
+INNER JOIN orders o ON o.user_id = u.id;</pre></div>
+      </div>
+      <div class="task">
+        <h2>S5. Users pa asnje porosi</h2>
+        <button type="button" class="reveal-btn" data-reveal="s5">Zgjidhja</button>
+        <div class="answer" id="s5"><pre>SELECT u.*
+FROM users u
+LEFT JOIN orders o ON o.user_id = u.id
+WHERE o.id IS NULL;</pre></div>
+      </div>
+      <div class="task">
+        <h2>S6. Sa porosi ka secili user (edhe 0)</h2>
+        <button type="button" class="reveal-btn" data-reveal="s6">Zgjidhja</button>
+        <div class="answer" id="s6"><pre>SELECT u.id, u.name, COUNT(o.id) AS n
+FROM users u
+LEFT JOIN orders o ON o.user_id = u.id
+GROUP BY u.id, u.name;</pre>
+        <p>COUNT(o.id) jo COUNT(*) — perndryshe 0-order user del 1.</p></div>
+      </div>
+      <div class="task">
+        <h2>S7. Users me te pakten 2 porosi</h2>
+        <button type="button" class="reveal-btn" data-reveal="s7">Zgjidhja</button>
+        <div class="answer" id="s7"><pre>SELECT user_id, COUNT(*) AS n
+FROM orders
+GROUP BY user_id
+HAVING COUNT(*) &gt;= 2;</pre></div>
+      </div>
+      <div class="task">
+        <h2>S8. Mesatarja e totalit te porosive</h2>
+        <button type="button" class="reveal-btn" data-reveal="s8">Zgjidhja</button>
+        <div class="answer" id="s8"><pre>SELECT AVG(total) FROM orders;</pre></div>
+      </div>
+      <div class="task">
+        <h2>S9. Produkte qe nuk jane shitur kurre</h2>
+        <button type="button" class="reveal-btn" data-reveal="s9">Zgjidhja</button>
+        <div class="answer" id="s9"><pre>SELECT p.name
+FROM products p
+LEFT JOIN order_items i ON i.product_id = p.id
+WHERE i.id IS NULL;</pre></div>
+      </div>
+      <div class="task">
+        <h2>S10. Top 5 produkte sipas qty te shitur</h2>
+        <button type="button" class="reveal-btn" data-reveal="s10">Zgjidhja</button>
+        <div class="answer" id="s10"><pre>SELECT p.name, SUM(i.qty) AS sold
+FROM products p
+JOIN order_items i ON i.product_id = p.id
+GROUP BY p.name
+ORDER BY sold DESC
+LIMIT 5;</pre></div>
+      </div>
+      <div class="task">
+        <h2>S11. Email duplikat</h2>
+        <button type="button" class="reveal-btn" data-reveal="s11">Zgjidhja</button>
+        <div class="answer" id="s11"><pre>SELECT email, COUNT(*) 
+FROM users
+GROUP BY email
+HAVING COUNT(*) &gt; 1;</pre></div>
+      </div>
+      <div class="task">
+        <h2>S12. Xhiro per dite</h2>
+        <button type="button" class="reveal-btn" data-reveal="s12">Zgjidhja</button>
+        <div class="answer" id="s12"><pre>SELECT created_at::date AS d, SUM(total)
+FROM orders
+GROUP BY 1
+ORDER BY 1;
+-- MySQL: DATE(created_at)</pre></div>
+      </div>
+      <div class="task">
+        <h2>S13. Porosi te 7 diteve te fundit, status paid</h2>
+        <button type="button" class="reveal-btn" data-reveal="s13">Zgjidhja</button>
+        <div class="answer" id="s13"><pre>SELECT * FROM orders
+WHERE status = 'paid'
+  AND created_at &gt;= NOW() - INTERVAL '7 days';
+-- MySQL: created_at &gt;= NOW() - INTERVAL 7 DAY</pre></div>
+      </div>
+      <div class="task">
+        <h2>S14. Ul stock me 1 nese ka stock</h2>
+        <button type="button" class="reveal-btn" data-reveal="s14">Zgjidhja</button>
+        <div class="answer" id="s14"><pre>UPDATE products
+SET stock = stock - 1
+WHERE id = 9 AND stock &gt; 0;</pre>
+        <p>Kontrollo rowcount. Fol transaksion me INSERT order_items.</p></div>
+      </div>
+      <div class="task">
+        <h2>S15. Useri me spent me te larte</h2>
+        <button type="button" class="reveal-btn" data-reveal="s15">Zgjidhja</button>
+        <div class="answer" id="s15"><pre>SELECT u.email, SUM(o.total) AS spent
+FROM users u
+JOIN orders o ON o.user_id = u.id
+GROUP BY u.email
+ORDER BY spent DESC
+LIMIT 1;</pre></div>
+      </div>
+      <div class="task">
+        <h2>S16. CASE: etiketo porosine</h2>
+        <p>small &lt; 20, medium &lt; 100, else large.</p>
+        <button type="button" class="reveal-btn" data-reveal="s16">Zgjidhja</button>
+        <div class="answer" id="s16"><pre>SELECT id, total,
+  CASE
+    WHEN total &lt; 20 THEN 'small'
+    WHEN total &lt; 100 THEN 'medium'
+    ELSE 'large'
+  END AS size
+FROM orders;</pre></div>
+      </div>
+    </article>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+</html>

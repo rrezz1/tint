@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detyra Web — TINT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html">TINT <span>Borek</span></a>
+    <nav></nav>
+  </header>
+  <main class="wrap">
+    <article class="page">
+      <p class="kicker"><a href="detyra.html">← te gjitha detyrat</a></p>
+      <h1>16 detyra REST, FastAPI, JS, Git</h1>
+
+      <div class="task">
+        <h2>W1. Dizajno API per tasks</h2>
+        <p>CRUD, filter sipas done=true/false. Shkruaj rutat.</p>
+        <button type="button" class="reveal-btn" data-reveal="w1">Zgjidhja</button>
+        <div class="answer" id="w1"><pre>GET    /tasks?done=false
+GET    /tasks/{id}
+POST   /tasks          → 201
+PATCH  /tasks/{id}
+DELETE /tasks/{id}     → 204</pre>
+        <p>Body: <code>{"title":"...","done":false}</code>. 404 nese id s’ekziston.</p></div>
+      </div>
+
+      <div class="task">
+        <h2>W2. Cili status?</h2>
+        <p>a) login i gabuar  b) JSON pa fushen title  c) fshi task qe s’ekziston  d) krijo me sukses</p>
+        <button type="button" class="reveal-btn" data-reveal="w2">Zgjidhja</button>
+        <div class="answer" id="w2"><p>a) 401 &nbsp; b) 400 ose 422 &nbsp; c) 404 &nbsp; d) 201</p></div>
+      </div>
+
+      <div class="task">
+        <h2>W3. FastAPI PATCH done</h2>
+        <button type="button" class="reveal-btn" data-reveal="w3">Zgjidhja</button>
+        <div class="answer" id="w3"><pre>from typing import Optional
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+
+app = FastAPI()
+TASKS = {1: {"id": 1, "title": "x", "done": False}}
+
+class TaskPatch(BaseModel):
+    title: Optional[str] = None
+    done: Optional[bool] = None
+
+@app.patch("/tasks/{tid}")
+def patch_task(tid: int, body: TaskPatch):
+    if tid not in TASKS:
+        raise HTTPException(404, "not found")
+    data = body.model_dump(exclude_unset=True)
+    TASKS[tid].update(data)
+    return TASKS[tid]</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>W4. Django model Task</h2>
+        <button type="button" class="reveal-btn" data-reveal="w4">Zgjidhja</button>
+        <div class="answer" id="w4"><pre>class Task(models.Model):
+    title = models.CharField(max_length=200)
+    done = models.BooleanField(default=False)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title</pre>
+        <p>Pastaj makemigrations / migrate.</p></div>
+      </div>
+
+      <div class="task">
+        <h2>W5. Pagination me offset</h2>
+        <p>page fillon nga 1, size 20. Shkruaj slice Python.</p>
+        <button type="button" class="reveal-btn" data-reveal="w5">Zgjidhja</button>
+        <div class="answer" id="w5"><pre>def page_slice(items, page, size=20):
+    start = (page - 1) * size
+    return {
+        "count": len(items),
+        "results": items[start:start + size],
+    }</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>W6. JS: merre listen, shfaq emrat</h2>
+        <button type="button" class="reveal-btn" data-reveal="w6">Zgjidhja</button>
+        <div class="answer" id="w6"><pre>async function loadUsers() {
+  const res = await fetch("/api/users");
+  if (!res.ok) throw new Error("fail " + res.status);
+  const users = await res.json();
+  document.querySelector("#list").innerHTML =
+    users.map(u => `&lt;li&gt;${u.name}&lt;/li&gt;`).join("");
+}</pre>
+        <p>Ne prod: escape HTML. Junior mjafton te permend XSS me nje fjali.</p></div>
+      </div>
+
+      <div class="task">
+        <h2>W7. JS: POST form pa reload</h2>
+        <button type="button" class="reveal-btn" data-reveal="w7">Zgjidhja</button>
+        <div class="answer" id="w7"><pre>form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const body = {
+    email: form.email.value,
+    name: form.name.value,
+  };
+  const res = await fetch("/api/users", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (res.status === 201) location.reload();
+});</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>W8. Filter ne JS</h2>
+        <p><code>users</code> array, kthe ata me age &gt;= 18.</p>
+        <button type="button" class="reveal-btn" data-reveal="w8">Zgjidhja</button>
+        <div class="answer" id="w8"><pre>const adults = users.filter(u => u.age &gt;= 18);</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>W9. CSS: 3 kolona, 1 ne mobil</h2>
+        <button type="button" class="reveal-btn" data-reveal="w9">Zgjidhja</button>
+        <div class="answer" id="w9"><pre>.grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media (max-width: 700px) {
+  .grid { grid-template-columns: 1fr; }
+}</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>W10. Git: ke conflict ne models.py</h2>
+        <p>Hapat me radhe.</p>
+        <button type="button" class="reveal-btn" data-reveal="w10">Zgjidhja</button>
+        <div class="answer" id="w10"><pre>git pull
+# hap models.py, hiq &lt;&lt;&lt; HEAD ==== &gt;&gt;&gt;
+# mbaj kodin e sakte (te dy feature nese duhen te dyja)
+git add models.py
+git commit
+git push</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>W11. Pytest FastAPI create user</h2>
+        <button type="button" class="reveal-btn" data-reveal="w11">Zgjidhja</button>
+        <div class="answer" id="w11"><pre>from fastapi.testclient import TestClient
+from main import app
+
+client = TestClient(app)
+
+def test_create_user():
+    r = client.post("/users", json={"email": "a@b.com", "name": "A"})
+    assert r.status_code == 201
+    assert r.json()["email"] == "a@b.com"</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>W12. CORS: frontend localhost:3000, API :8000</h2>
+        <p>Cfare shton ne FastAPI?</p>
+        <button type="button" class="reveal-btn" data-reveal="w12">Zgjidhja</button>
+        <div class="answer" id="w12"><pre>from fastapi.middleware.cors import CORSMiddleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)</pre>
+        <p>Ne prod: origina konkrete, jo * me cookie.</p></div>
+      </div>
+
+      <div class="task">
+        <h2>W13. Hash password, mos kthe hash ne GET</h2>
+        <button type="button" class="reveal-btn" data-reveal="w13">Zgjidhja</button>
+        <div class="answer" id="w13"><pre># ruaj bcrypt/argon2, kurr plaintext
+# GET /users/1 kthen {id, email, name} JO password_hash
+def to_public(user):
+    return {k: user[k] for k in ("id", "email", "name")}</pre></div>
+      </div>
+
+      <div class="task">
+        <h2>W14. 401 vs 403 — skenar</h2>
+        <p>User i loguar rreket te fshije taskun e tjetrit.</p>
+        <button type="button" class="reveal-btn" data-reveal="w14">Zgjidhja</button>
+        <div class="answer" id="w14"><p>403 Forbidden. 401 nese s’ka token fare.</p></div>
+      </div>
+
+      <div class="task">
+        <h2>W15. N+1 ne Django — rregullo</h2>
+        <p>View liston Article me author.name ne loop.</p>
+        <button type="button" class="reveal-btn" data-reveal="w15">Zgjidhja</button>
+        <div class="answer" id="w15"><pre>Article.objects.select_related("author").all()</pre>
+        <p>FK = select_related. Reverse/M2M = prefetch_related.</p></div>
+      </div>
+
+      <div class="task">
+        <h2>W16. Shkruaj Dockerfile minimal per FastAPI</h2>
+        <button type="button" class="reveal-btn" data-reveal="w16">Zgjidhja</button>
+        <div class="answer" id="w16"><pre>FROM python:3.12-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]</pre></div>
+      </div>
+    </article>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+</html>

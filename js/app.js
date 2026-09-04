@@ -3,6 +3,7 @@ const LINKS = [
   ["index.html", "Plan"],
   ["python.html", "Python"],
   ["live.html", "Live kod"],
+  ["detyra.html", "Detyra"],
   ["frameworks.html", "Django / FastAPI"],
   ["api.html", "REST"],
   ["sql.html", "SQL"],
